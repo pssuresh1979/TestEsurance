@@ -1,9 +1,16 @@
 package com.esu.qa.pages;
 
 import com.esu.qa.base.TestBase;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.*;
+import java.time.Duration;
 
 public class BasicFormPage extends TestBase {
     @FindBy(xpath = "//input[@name='address']")
@@ -42,6 +49,10 @@ public class BasicFormPage extends TestBase {
     @FindBy(xpath = "//*[@id='nextButton-0']")
     WebElement saveAndContinue;
 
+    @FindBy(xpath = "//div[@aria-label='Error']//p/strong")
+    WebElement pleaseCorrect;
+
+
     public BasicFormPage(){
         PageFactory.initElements(driver,this);
     }
@@ -66,7 +77,11 @@ public class BasicFormPage extends TestBase {
     }
 
     public void setPriorAddressToNo(){
-        sameCityNo.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,350)", "");
+
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", sameCityNo);
     }
 
     public void verifyPriorAddressIsYes() {
@@ -74,13 +89,32 @@ public class BasicFormPage extends TestBase {
     }
 
     public void populatePriorAddress(String strPriorStreetName, String strPriorAptNumber,String strPriorZipCode, String strPriorCity) {
+        try {
+            Thread.sleep(1000);
+        }catch (Exception exception)
+        {
+            exception.printStackTrace();
+        }
         priorStreetName.sendKeys(strPriorStreetName);
         priorAptNumber.sendKeys(strPriorAptNumber);
         priorZipCode.sendKeys(strPriorZipCode);
         priorCity.sendKeys(strPriorCity);
     }
 
+    public String sendLabelErrorForNotFilledFutureAddress() {
+        String text = pleaseCorrect.getText();
+        return text;
+    }
+
      public void clickSaveAndContinue(){
+         //WebDriverWait wait = new WebDriverWait(driver,30);
+         //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='nextButton-0']")));
+         try {
+             Thread.sleep(2000);
+         } catch (Exception exception) {
+             exception.printStackTrace();
+         }
          saveAndContinue.click();
+
      }
 }

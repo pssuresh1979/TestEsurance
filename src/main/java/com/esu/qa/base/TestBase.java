@@ -33,11 +33,11 @@ public class TestBase {
     public  static void initialisation(){
         String  browserName = prop.getProperty("browser");
            if(browserName.equals("chrome")){
-               System.setProperty("webdriver.chrome.driver","C:\\software\\chromedriver_win32\\chromedriver.exe");
+               System.setProperty("webdriver.chrome.driver","C:\\software\\chromedriver_win32_2\\chromedriver.exe");
                driver= new ChromeDriver();
            }
            else if(browserName.equals("FF")){
-               System.setProperty("webdriver.chrome.driver","C:\\software\\chromedriver_win32\\chromedriver.exe");
+               System.setProperty("webdriver.chrome.driver","C:\\software\\chromedriver_win32_2\\chromedriver.exe");
                driver = new FirefoxDriver();
            }
            driver.manage().window().maximize();
