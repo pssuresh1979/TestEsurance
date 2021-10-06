@@ -90,9 +90,8 @@ public class VehicleInfoPage extends TestBase {
         secondVy.selectByVisibleText("2007");
     }
 
-    public void selectSecondvehicleMake() {
+   /* public void selectSecondvehicleMake() {
         Select modelmake = new Select(make);
-        modelmake.selectByVisibleText("HONDA");
-    }
-
+        modelmake.selectByVisibleText("HONDA");*/
 }
+
